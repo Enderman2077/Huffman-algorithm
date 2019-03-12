@@ -1,12 +1,3 @@
-/*ÊµÑéÈı: 
-´Ë´ÎÊµÑéÏŞ¶¨ÓïÑÔC/C++£¬ÔÊĞíÊ¹ÓÃstl¡£
-ddl£ºÏÂÏÂÖÜÁù£¨11ÔÂ19ÈÕ£©¡£
-ÊµÑéÒªÇó£ºÊµÏÖÈÎÒâ¶ş½øÖÆÎÄ¼şÑ¹Ëõ½âÑ¹¡£
-½«¹ş·òÂüÊ÷»òÕß´ÊÆµÂÊ±í±£´æµ½ÎÄ¼ş£¬
-Ñ¹Ëõºó½âÑ¹ËùĞèĞÅÏ¢È«²¿´ÓÄã×Ô¼ºÑ¹ËõµÃµ½µÄÎÄ¼şÖĞÄÃµ½¡£
-¼ì²é:¶ÔÓÚÒ»°ãtxtÎÄµµÊµÏÖĞ§¹ûÃ÷ÏÔµÄÑ¹Ëõ½á¹û²¢ÕıÈ·½âÑ¹7·Ö£¬
-´óÎÄ¼ş£¨¼¸Ê®Õ×ÒÔÉÏ£©·ÇÎÄ±¾ÎÄ¼şÕıÈ·Ñ¹Ëõ½âÑ¹¡££¨9·Ö£©±¨¸æ1·Ö¡£ 
-*/
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
@@ -18,12 +9,12 @@ typedef struct HTNode{
 	int parent,lchild,rchild;
 }HTNode;
 
-char *HuffmanCode[256];//ÓÃÀ´´æ´¢Ã¿¸ö×Ö·ûµÄHuffman±àÂë 
-int weighttemp[256];//ÓÃÀ´´æ´¢Ã¿¸ö×Ö·ûµÄÈ¨ÖØ 
+char *HuffmanCode[256];//ç”¨æ¥å­˜å‚¨æ¯ä¸ªå­—ç¬¦çš„Huffmanç¼–ç  
+int weighttemp[256];//ç”¨æ¥å­˜å‚¨æ¯ä¸ªå­—ç¬¦çš„æƒé‡ 
 char filename[1000];
 char savename[1000];
 
-void HTCreate(HTNode *node,int i){//´Ó0µ½i-1½ÚµãÖĞÑ¡³öÈ¨Öµ×îĞ¡µÄÁ½¸ö½Úµã 
+void HTCreate(HTNode *node,int i){//ä»0åˆ°i-1èŠ‚ç‚¹ä¸­é€‰å‡ºæƒå€¼æœ€å°çš„ä¸¤ä¸ªèŠ‚ç‚¹ 
 	int min=INFINITE;
 	int a,b,j;
 	for(j=0;j<i;j++){
@@ -45,7 +36,7 @@ void HTCreate(HTNode *node,int i){//´Ó0µ½i-1½ÚµãÖĞÑ¡³öÈ¨Öµ×îĞ¡µÄÁ½¸ö½Úµã
 	node[b].parent=i;
 	node[i].lchild=a;
 	node[i].rchild=b;
-	node[i].weight=node[a].weight+node[b].weight;//È¨ÖµÏà¼ÓÉú³ÉĞÂ½Úµã 
+	node[i].weight=node[a].weight+node[b].weight;//æƒå€¼ç›¸åŠ ç”Ÿæˆæ–°èŠ‚ç‚¹ 
 }
 
 HTNode *HuffmanCoding(int n){
@@ -68,8 +59,8 @@ HTNode *HuffmanCoding(int n){
 			j++;
 		}
 	}
-	for(i=n;i<2*n-1;i++) HTCreate(node,i);//Éú³ÉHuffmanÊ÷
-	for(i=0;i<2*n-1;i++) node[i].weight=0;//ÓÃweightÓòÀ´±ê¼Ç±éÀúHuffmanÊ÷¹ı³ÌÖĞ½ÚµãµÄ×´Ì¬ 
+	for(i=n;i<2*n-1;i++) HTCreate(node,i);//ç”ŸæˆHuffmanæ ‘
+	for(i=0;i<2*n-1;i++) node[i].weight=0;//ç”¨weightåŸŸæ¥æ ‡è®°éå†Huffmanæ ‘è¿‡ç¨‹ä¸­èŠ‚ç‚¹çš„çŠ¶æ€ 
 	k=2*n-2;
 	while(k!=-1){
 		if(node[k].weight==0){
@@ -93,11 +84,11 @@ HTNode *HuffmanCoding(int n){
 				cdlength++;
 			}
 		}
-		else{//weight=2µÄÇé¿ö£¬´ú±í´Ë½Úµã×óÓÒ¶¼ÒÑ×ß¹ı 
+		else{//weight=2çš„æƒ…å†µï¼Œä»£è¡¨æ­¤èŠ‚ç‚¹å·¦å³éƒ½å·²èµ°è¿‡ 
 			node[k].weight=0;
 			k=node[k].parent;
 			cdlength--;
-		}//ÍË»ØÒ»¸ö½Úµã£¬±àÂë³¤¶È¼õÒ» 
+		}//é€€å›ä¸€ä¸ªèŠ‚ç‚¹ï¼Œç¼–ç é•¿åº¦å‡ä¸€ 
 	}
 	return node;
 }
@@ -108,19 +99,19 @@ void Compress(){
 	unsigned char uch;
 	HTNode *node;
 	int Readbytecnt=0,Huffmanbytecnt=0;
-	int Huffmancnt=0;//¼ÇÂ¼Ñ¹ËõÇ°ºóµÄ×Ö½ÚÊı
-	int i,j,k,wch,filelength,rcnt=0,mark=0;//rcntÓÃÓÚ¼ÇÂ¼ÎÄµµÖĞ³öÏÖµÄ×Ö·ûÖÖÀàÊıÁ¿
+	int Huffmancnt=0;//è®°å½•å‹ç¼©å‰åçš„å­—èŠ‚æ•°
+	int i,j,k,wch,filelength,rcnt=0,mark=0;//rcntç”¨äºè®°å½•æ–‡æ¡£ä¸­å‡ºç°çš„å­—ç¬¦ç§ç±»æ•°é‡
 	for(i=0;i<256;i++) weighttemp[i]=0;
-	printf("ÇëÊäÈëÒªÑ¹ËõµÄÎÄ¼şÃû£º");
+	printf("è¯·è¾“å…¥è¦å‹ç¼©çš„æ–‡ä»¶åï¼š");
 	scanf("%s",filename);
 	if(!(fpr=fopen(filename,"rb"))){
-		printf("´ËÎÄ¼şÎŞ·¨´ò¿ª£¬¿ÉÄÜÎª¿ÕÎÄ¼ş£¡");
+		printf("æ­¤æ–‡ä»¶æ— æ³•æ‰“å¼€ï¼Œå¯èƒ½ä¸ºç©ºæ–‡ä»¶ï¼");
 		exit(0);
 	}
-	printf("ÇëÊäÈëÑ¹ËõÎÄ¼şµÄÃû×Ö¼°¸ñÊ½£º");
+	printf("è¯·è¾“å…¥å‹ç¼©æ–‡ä»¶çš„åå­—åŠæ ¼å¼ï¼š");
 	scanf("%s",savename);
 	if(!(fpw=fopen(savename,"wb"))){
-		printf("´ËÎÄ¼şÎŞ·¨´ò¿ª£¡");
+		printf("æ­¤æ–‡ä»¶æ— æ³•æ‰“å¼€ï¼");
 		exit(0);
 	}
 	fseek(fpr,0,SEEK_END);
@@ -152,11 +143,11 @@ void Compress(){
 	for(i=0;i<rcnt;i++){
 		fputc(node[i].ascii,fpw);
 		fwrite(&weighttemp[node[i].ascii],sizeof(int),1,fpw);
-	}//½«×Ö·ûÆµÂÊ±í´æÈëÎÄ¼şÖĞ 
-	if(Huffmancnt%8){//Èô×îºóÒ»Î»ĞèÒª²¹Æë 
+	}//å°†å­—ç¬¦é¢‘ç‡è¡¨å­˜å…¥æ–‡ä»¶ä¸­ 
+	if(Huffmancnt%8){//è‹¥æœ€åä¸€ä½éœ€è¦è¡¥é½ 
 		fputc(Huffmancnt%8,fpw);
 	}
-	else fputc(8,fpw); //²»Ğè²¹ÆëµÄÇé¿ö 
+	else fputc(8,fpw); //ä¸éœ€è¡¥é½çš„æƒ…å†µ 
 	mark=0;
 	while(1){
 		wch=0;
@@ -175,8 +166,8 @@ void Compress(){
 	}
 	fclose(fpr);
 	fclose(fpw);
-	printf("ÎÄ¼şÑ¹Ëõ³É¹¦£¡");
-	printf("ÎÄ¼şÑ¹ËõÂÊÎª£º%f%%",(float)(100*Huffmanbytecnt)/Readbytecnt);
+	printf("æ–‡ä»¶å‹ç¼©æˆåŠŸï¼");
+	printf("æ–‡ä»¶å‹ç¼©ç‡ä¸ºï¼š%f%%",(float)(100*Huffmanbytecnt)/Readbytecnt);
 	free(node);
 	free(write);
 }
@@ -188,16 +179,16 @@ void DeCompress(){
 	char ch;
 	unsigned char uch;
 	HTNode *node;
-	printf("ÇëÊäÈëÒª½âÑ¹µÄÎÄ¼şÃû³Æ£º");
+	printf("è¯·è¾“å…¥è¦è§£å‹çš„æ–‡ä»¶åç§°ï¼š");
 	scanf("%s",filename);
 	if(!(fpr=fopen(filename,"rb"))){
-		printf("´ËÎÄ¼şÎŞ·¨´ò¿ª£¡");
+		printf("æ­¤æ–‡ä»¶æ— æ³•æ‰“å¼€ï¼");
 		exit(0);
 	}
-	printf("ÇëÊäÈë½âÑ¹ÎÄ¼şµÄÃû×Ö¼°¸ñÊ½£º");
+	printf("è¯·è¾“å…¥è§£å‹æ–‡ä»¶çš„åå­—åŠæ ¼å¼ï¼š");
 	scanf("%s",savename);
 	if(!(fpw=fopen(savename,"wb"))){
-		printf("´ËÎÄ¼şÎŞ·¨´ò¿ª£¡");
+		printf("æ­¤æ–‡ä»¶æ— æ³•æ‰“å¼€ï¼");
 		exit(0);
 	}
 	fseek(fpr,0,SEEK_END);
@@ -217,9 +208,9 @@ void DeCompress(){
 		node[i].ascii=uch;
 		fread(&node[i].weight,sizeof(int),1,fpr);
 	}
-	for(i=rcnt;i<2*rcnt-1;i++) HTCreate(node,i);//ÖØĞÂÉú³ÉHuffmanÊ÷
+	for(i=rcnt;i<2*rcnt-1;i++) HTCreate(node,i);//é‡æ–°ç”ŸæˆHuffmanæ ‘
 	ch=fgetc(fpr);
-	valid=ch;//¶ÁÈ¡×îºóÒ»¸ö×Ö½ÚÊµ¼ÊÓĞĞ§µÄÎ»Êı 
+	valid=ch;//è¯»å–æœ€åä¸€ä¸ªå­—èŠ‚å®é™…æœ‰æ•ˆçš„ä½æ•° 
 	k=2*rcnt-2;
 	pos1=ftell(fpr);
 	for(p=pos1;p<pos2-1;p++){
@@ -231,14 +222,14 @@ void DeCompress(){
 			byte[7-j]=b;
 		}
 		for(i=0;i<8;i++){
-			if(byte[i]){//Èç¹û±àÂëÎª1£¬ÏòÓÒ 
+			if(byte[i]){//å¦‚æœç¼–ç ä¸º1ï¼Œå‘å³ 
 				k=node[k].rchild;
-				if(node[k].lchild==-1&&node[k].rchild==-1){//Èç¹û×ßµ½ÁËÒ¶×Ó½Úµã£¬µÃµ½±àÂë¶ÔÓ¦µÄ×Ö·û²¢Ğ´ÈëÎÄ¼şÖĞ 
+				if(node[k].lchild==-1&&node[k].rchild==-1){//å¦‚æœèµ°åˆ°äº†å¶å­èŠ‚ç‚¹ï¼Œå¾—åˆ°ç¼–ç å¯¹åº”çš„å­—ç¬¦å¹¶å†™å…¥æ–‡ä»¶ä¸­ 
 					fwrite(&node[k].ascii,sizeof(char),1,fpw);
 					k=2*rcnt-2;
 				}
 			}
-			else{//Èç¹û±àÂëÎª0£¬Ïò×ó 
+			else{//å¦‚æœç¼–ç ä¸º0ï¼Œå‘å·¦ 
 				k=node[k].lchild;
 				if(node[k].lchild==-1&&node[k].rchild==-1){ 
 					fwrite(&node[k].ascii,sizeof(char),1,fpw);
@@ -255,14 +246,14 @@ void DeCompress(){
 		byte[7-j]=b;
 	}
 	for(i=8-valid;i<8;i++){
-		if(byte[i]){//Èç¹û±àÂëÎª1£¬ÏòÓÒ 
+		if(byte[i]){//å¦‚æœç¼–ç ä¸º1ï¼Œå‘å³ 
 			k=node[k].rchild;
-			if(node[k].lchild==-1&&node[k].rchild==-1){//Èç¹û×ßµ½ÁËÒ¶×Ó½Úµã£¬µÃµ½±àÂë¶ÔÓ¦µÄ×Ö·û²¢Ğ´ÈëÎÄ¼şÖĞ 
+			if(node[k].lchild==-1&&node[k].rchild==-1){//å¦‚æœèµ°åˆ°äº†å¶å­èŠ‚ç‚¹ï¼Œå¾—åˆ°ç¼–ç å¯¹åº”çš„å­—ç¬¦å¹¶å†™å…¥æ–‡ä»¶ä¸­ 
 				fwrite(&node[k].ascii,sizeof(char),1,fpw);
 				k=2*rcnt-2;
 			}
 		}
-		else{//Èç¹û±àÂëÎª0£¬Ïò×ó 
+		else{//å¦‚æœç¼–ç ä¸º0ï¼Œå‘å·¦ 
 			k=node[k].lchild;
 			if(node[k].lchild==-1&&node[k].rchild==-1){ 
 				fwrite(&node[k].ascii,sizeof(char),1,fpw);
@@ -270,14 +261,14 @@ void DeCompress(){
 			}
 		}
 	}
-	printf("½âÑ¹Íê³É£¡");
+	printf("è§£å‹å®Œæˆï¼");
 	fclose(fpr);
 	fclose(fpw);
 }
 
 int main(){
 	int sel;
-	printf("ÇëÊäÈëÊı×ÖÑ¡Ôñ¹¦ÄÜ(0´ú±í±àÂëÑ¹Ëõ£¬1´ú±í½âÂë½âÑ¹)£º\n");
+	printf("è¯·è¾“å…¥æ•°å­—é€‰æ‹©åŠŸèƒ½(0ä»£è¡¨ç¼–ç å‹ç¼©ï¼Œ1ä»£è¡¨è§£ç è§£å‹)ï¼š\n");
 	scanf("%d",&sel);
 	if(!sel) Compress();
 	else DeCompress();
